@@ -37,10 +37,10 @@ When triggered by CloudWatch log errors, execute this workflow automatically:
 
 3. **Solution Implementation**
    - Extract the GitHub repository name from CloudWatch log group tags
-   - Use the claude_code tool to analyze the current infrastructure state in the identified repository
-   - Always use main branch to analyze
-   - Use claude_code tool to analyze previous commits to identify if the bug was introduced in recent changes
-   - Identify the root cause and required fixes using code analysis capabilities
+   - Analyze the current infrastructure state in the identified repository.
+   - Always use main branch to analyze.
+   - Analyze previous commits to identify if the bug was introduced in recent changes
+   - Identify the root cause and required fixes
    - **CRITICAL**: Apply ONLY the specific fix for the identified issue - do not implement broader security improvements, best practices, or code refactoring unless directly related to the error
    - **🚨 PRESERVE EXISTING CODE PATTERNS and STYLES AT ALL COSTS 🚨**
      - Make ONLY the absolute minimum changes required to fix the specific error
@@ -48,7 +48,6 @@ When triggered by CloudWatch log errors, execute this workflow automatically:
      - NEVER refactor or "improve" unrelated code
      - NEVER change existing aws resource names, variable names, function names, or structure
      - NEVER modify working code that isn't part of the fix
-   - Use claude_code tool to implement the required code changes
    - Create GitHub PR with:
      - Clear title referencing the Jira ticket
      - Description focused solely on the specific fix applied
