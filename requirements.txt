@@ -4,3 +4,4 @@ bedrock-agentcore
 bedrock-agentcore-starter-toolkit
 mcp
 mcp-proxy
+claude-code-sdk
