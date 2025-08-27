@@ -1,26 +1,13 @@
 import os
 import pathlib
-import json
 import subprocess
 import logging
-from typing import Dict, Any
 from strands import Agent, tool
-from strands_tools import use_aws, calculator, current_time
-from strands.tools.mcp import MCPClient
-from mcp import StdioServerParameters, stdio_client
 from bedrock_agentcore.runtime import BedrockAgentCoreApp
 
 # Configure logging
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-
-custom_env = os.environ.copy()
-custom_env["UV_CACHE_DIR"] = "/tmp/uv_cache"
-custom_env["XDG_CACHE_HOME"] = "/tmp"
-
-WELCOME_MESSAGE = """
-Welcome to the Cloud Agent Assistant! How can I help you today?
-"""
 
 STRANDS_PROMPT = pathlib.Path("prompts/strands_agent.md").read_text()
 
@@ -64,11 +51,8 @@ app = BedrockAgentCoreApp()
 
 agent = Agent(
     system_prompt=STRANDS_PROMPT,
-    model="anthropic.claude-3-5-sonnet-20241022-v2:0",
+    model="apac.anthropic.claude-sonnet-4-20250514-v1:0",
     tools=[
-        calculator,
-        current_time,
-        use_aws,
         claude_code,
     ],
 )
