@@ -19,10 +19,11 @@ custom_env["UV_CACHE_DIR"] = "/tmp/uv_cache"
 custom_env["XDG_CACHE_HOME"] = "/tmp"
 
 WELCOME_MESSAGE = """
-Welcome to the Customer Support Assistant! How can I help you today?
+Welcome to the Cloud Agent Assistant! How can I help you today?
 """
 
-SYSTEM_PROMPT = pathlib.Path("system_prompt.md").read_text()
+STRANDS_PROMPT = pathlib.Path("strands_agent.md").read_text()
+CLAUDE_PROMPT = pathlib.Path("claude_agent.md").read_text()
 
 
 @tool
@@ -119,6 +120,9 @@ def execute_claude_code(command: str) -> Dict[str, Any]:
     """
     # Split command and remove 'claude' from the beginning
     args = command.split()[1:] if command.startswith('claude ') else command.split()
+
+    # Add system prompt argument to claude command
+    # args.extend(['--system-prompt-file', system_prompt_file])
     
     # Set up environment variables
     env = os.environ.copy()
@@ -189,7 +193,7 @@ mcp_client.start()
 tools = mcp_client.list_tools_sync()
 
 agent = Agent(
-    system_prompt=SYSTEM_PROMPT,
+    system_prompt=STRANDS_PROMPT,
     model="anthropic.claude-3-5-sonnet-20241022-v2:0",
     tools=[
         calculator,

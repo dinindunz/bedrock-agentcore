@@ -51,6 +51,7 @@ htmlcov/
 docs/
 *.md
 !README.md
+!prompts/*.md
 
 # CI/CD
 .github/

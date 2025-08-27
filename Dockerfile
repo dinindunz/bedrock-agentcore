@@ -9,13 +9,14 @@ RUN apt-get update && apt-get install -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt requirements.txt
-COPY system_prompt.md system_prompt.md
+COPY ./prompts/strands_agent.md strands_agent.md
+COPY ./prompts/claude_agent.md claude_agent.md
 # Install from requirements file
 RUN pip install -r requirements.txt
 
 # Set environment variables for Bedrock
 ENV CLAUDE_CODE_USE_BEDROCK=1
-ENV AWS_REGION=us-east-1
+ENV AWS_REGION=ap-southeast-2
 ENV ANTHROPIC_MODEL=apac.anthropic.claude-sonnet-4-20250514-v1:0
 
 
